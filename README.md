@@ -1,1 +1,1 @@
-# fight-bookie
+# coinflip-bookie
