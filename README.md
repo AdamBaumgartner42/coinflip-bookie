@@ -8,5 +8,7 @@ v0.1
     - Wager amount ($)
  - output payouts after event is finished
 
+ - fixed max array of players
+
 
 
