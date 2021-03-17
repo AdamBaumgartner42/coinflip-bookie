@@ -26,9 +26,11 @@ void print_msg(const char *filename)
 {
     char *line = calloc(MAX_LINE, 1);
     FILE *file = fopen(filename, "r");
+
     while(fgets(line, MAX_LINE, file)){ 
         printf("%s", line);
     }
+
     free (line);
     fclose (file);
 }
@@ -36,12 +38,31 @@ void print_msg(const char *filename)
 
 int main (int argc, char *argv[])
 {
+
+    // Spash Screen
     yellow(); 
     print_msg("welcome.txt");
     reset();
+    
+    // Get game inputs
+    //print_msg("startup.txt");
+    // total number of players
+
+    printf("how many players? ");
+    int count;
+    scanf("%d", &count);
+    printf("player count: %d\n", count);
+
+    // init array with player structs
+        
+    // For loop to input the names, bets and amounts
 
     // record the names and wagers placed
-    // use a struct
+    // use an array of structs
+
+    // -- Flip the coin --
+
+    // Display the payout results
 
     struct player Adam; // Declare Adam of type customer
     
