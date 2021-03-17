@@ -4,11 +4,11 @@
 
 size_t const MAX_LINE = 128;
 
-struct player {
+typedef struct Player {
     char name [50]; 
     char bet [50]; 
-    int amount; 
-}; 
+    int wager; 
+}Player; 
 
 void yellow ()
 {
@@ -19,8 +19,6 @@ void reset()
 {
     printf("\033[0m");
 }
-    
-
 
 void print_msg(const char *filename)
 {
@@ -35,47 +33,62 @@ void print_msg(const char *filename)
     fclose (file);
 }
 
-
 int main (int argc, char *argv[])
 {
-
     // Spash Screen
     yellow(); 
     print_msg("welcome.txt");
     reset();
     
     // Get game inputs
-    //print_msg("startup.txt");
-    // total number of players
-
-    printf("how many players? ");
+    print_msg("startup.txt");
+    printf("How many players? ");
     int count;
-    scanf("%d", &count);
-    printf("player count: %d\n", count);
-
-    // init array with player structs
+    scanf("%d", &count); // I think the "\n" is interfering later
+    while(getchar() != '\n'); // consume whitespace from scanf
+   
+    // Player Information
+    Player players[count]; 
+    int bet_choice;
+    int i = 0;
+    
+    for (i = 0; i < count ; i++){
+        // Name 
+        printf("\nPlayer %d name\n--> ", i+1); 
+        fgets(players[i].name, MAX_LINE, stdin); 
+        players[i].name[strcspn(players[i].name, "\n")] = 0; // remove trailing "\n"
         
-    // For loop to input the names, bets and amounts
+        // Bet
+        printf("\n%s's bet?\nHeads: 1\nTails: 2\n--> ", players[i].name);
+        scanf("%d", &bet_choice);
+        while(getchar() != '\n'); // consume whitespace from scanf
+        if(bet_choice == 1){
+            strcpy(players[i].bet, "Heads");
+        } else { 
+            strcpy(players[i].bet, "Tails");
+        }
 
-    // record the names and wagers placed
-    // use an array of structs
+        // Wager
+        printf("\n%s's wager?\n--> ", players[i].name);
+        scanf("%d", &players[i].wager);
+        while(getchar() != '\n'); // consume whitespace from scanf
+
+    }
+
+    // Summary Print
+    printf("\nSummary:\n");
+    for (i = 0; i < count; i++){
+        printf("%s; %s; $%d\n", players[i].name, \
+            players[i].bet, players[i].wager);
+    }
+    
+// OPEN ITEMS:
+
+    // Makefile with automated tests confirming the inputs
 
     // -- Flip the coin --
 
     // Display the payout results
-
-    struct player Adam; // Declare Adam of type customer
-    
-    // Init struct
-    strcpy(Adam.name, "Adam");
-    strcpy(Adam.bet, "Heads"); 
-    Adam.amount = 20;
-    
-    printf("name: %s\nbet: %s\namount: $%d\n", \
-        Adam.name, Adam.bet, Adam.amount);
-    
-
-
 
     return 0;
 }

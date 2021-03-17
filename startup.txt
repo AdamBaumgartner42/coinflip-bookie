@@ -1,0 +1,10 @@
+Welcome to Coin Flip Bookie! 
+
+Take bets on the result of a coin flip. 
+
+Directions: 
+    1. Enter number of players
+    2. Enter players and their bets
+    3. (Flip Coin)
+    4. Display payout results
+
